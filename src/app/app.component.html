@@ -1,0 +1,6 @@
+<div style="text-align: center;">
+  <p style="background-color: blanchedalmond;">{{title}}</p>
+  <hr />
+  <!-- <app-hello-world></app-hello-world> -->
+  <app-child-comp (childEvent)="title=$event" [parentData]="name"></app-child-comp>
+</div>
