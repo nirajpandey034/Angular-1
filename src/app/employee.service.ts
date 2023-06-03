@@ -9,9 +9,13 @@ import { Observable } from 'rxjs';
 export class EmployeeService {
   constructor(private http: HttpClient) {}
 
-  private _url: string = 'https://reqres.in/api/users/2';
+  private _getURL: string = 'https://reqres.in/api/users';
+  private _postUrl: string = 'https://reqres.in/api/register';
 
-  getEmployeeData(): Observable<IEmployee> {
-    return this.http.get<IEmployee>(this._url);
+  getEmployeeData(): Observable<IEmployee[]> {
+    return this.http.get<IEmployee[]>(this._getURL);
+  }
+  createEmployeeData(data: any): Observable<any> {
+    return this.http.post<any>(this._postUrl, data);
   }
 }

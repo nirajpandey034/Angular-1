@@ -4,23 +4,29 @@ import { IEmployee } from 'intefaces/Employee';
 
 @Component({
   selector: 'app-employee',
-  template: `
-    <img src="{{ employee.avatar }}" alt="pic" />
-    <p>
-      {{ employee.id }} - {{ employee.first_name }} {{ employee.last_name }}
-    </p>
-    <p><a href="{{ employee.email }}">Email me</a></p>
-  `,
+  templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
   constructor(private _employeeService: EmployeeService) {}
-  public employee = <IEmployee>{};
+  public employee = <IEmployee[]>[];
+  public email: string = '';
+  public password: string = '';
   ngOnInit(): void {
     this._employeeService.getEmployeeData().subscribe((data) => {
       const d: any = data;
       this.employee = d.data;
     });
   }
-  // public str = 'testing hoche!';
+
+  public createuser = () => {
+    this._employeeService
+      .createEmployeeData({
+        email: this.email,
+        password: this.password,
+      })
+      .subscribe((data) => {
+        alert(`token: ${data.token}`);
+      });
+  };
 }

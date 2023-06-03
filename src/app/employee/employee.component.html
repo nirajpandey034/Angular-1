@@ -1,1 +1,12 @@
-<p>{{str}}</p>
+<div class="employee-list">
+  <ul *ngFor="let emp of employee; index as i">
+    <img src="{{ emp.avatar }}" alt="pic" />
+    <p>{{ emp.id }} - {{ emp.first_name }} {{ emp.last_name }}</p>
+    <p><a href="{{ emp.email }}">Email me</a></p>
+  </ul>
+</div>
+<div class="employee-registration-form">
+  <input [(ngModel)]="email" type="text" placeholder="Email" />
+  <input [(ngModel)]="password" type="text" placeholder="Password" />
+  <button type="button" (click)="createuser()">Register User</button>
+</div>
