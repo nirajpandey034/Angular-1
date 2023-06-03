@@ -12,21 +12,33 @@ export class EmployeeComponent implements OnInit {
   public employee = <IEmployee[]>[];
   public email: string = '';
   public password: string = '';
+  public error: string = '';
   ngOnInit(): void {
-    this._employeeService.getEmployeeData().subscribe((data) => {
-      const d: any = data;
-      this.employee = d.data;
+    this._employeeService.getEmployeeData().subscribe({
+      next: (data) => {
+        const d: any = data;
+        this.employee = d.data;
+      },
+      error: (error) => {
+        this.error = error.message;
+      },
     });
   }
 
   public createuser = () => {
+    this.error = '';
     this._employeeService
       .createEmployeeData({
         email: this.email,
         password: this.password,
       })
-      .subscribe((data) => {
-        alert(`token: ${data.token}`);
+      .subscribe({
+        next: (data) => {
+          alert(`token: ${data.token}`);
+        },
+        error: (error) => {
+          this.error = error.message;
+        },
       });
   };
 }

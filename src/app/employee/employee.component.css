@@ -11,3 +11,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.error {
+  visibility: visible;
+  color: red;
+}
